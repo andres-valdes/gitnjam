@@ -1,8 +1,14 @@
 from wtforms import Form, TextField, StringField, validators, PasswordField
 from flask_admin.contrib.pymongo import ModelView
 from config.database import Mongo
+from flask_pymongo import PyMongo
 
-mongo = Mongo()
+from flask import Flask
+
+app = Flask(__name__) 
+app.config['MONGO_DBNAME'] = 'gitnjam'
+app.config['MONGO_URI'] = 'mongodb://localhost/gitnjam'
+mongo = PyMongo(app) 
 
 class LoginForm(Form):
     email = StringField('Email',

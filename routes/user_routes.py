@@ -1,14 +1,20 @@
 from datetime import datetime
-
 from flask import Flask, render_template, request, session, redirect, url_for, flash, Blueprint
 from passlib.hash import sha256_crypt
-from models.user_model import *
+from models.user_model import SignupForm, LoginForm, Form
+from wtforms import Form, TextField, StringField, validators, PasswordField
 from flask_pymongo import PyMongo
 from functools import wraps
 from config.database import Mongo
 
 
-mongo = Mongo()
+from flask import Flask
+
+app = Flask(__name__) 
+app.config['MONGO_DBNAME'] = 'gitnjam'
+app.config['MONGO_URI'] = 'mongodb://localhost/gitnjam'
+mongo = PyMongo(app) 
+
 user_route = Blueprint('user_route', __name__)
 
 def is_logged_in(f):
@@ -17,7 +23,7 @@ def is_logged_in(f):
         if 'is_logged_in' in session:
             return f(*args, **kwargs)
         flash('Unauthorized, Please login', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('user_route.login'))
     return wrap
 
 @user_route.route('/', methods = ['GET', 'POST'])
@@ -35,29 +41,28 @@ def login():
             password = login_user['password']
             password_candidate = request.form['password']
             if sha256_crypt.verify(password_candidate, password):
-                session['email'] = request.form['email']
+                session['username'] = request.form['username']
                 session['is_logged_in'] = True
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('user_route.feed'))
 
         flash('Invalid Password or Email combination', 'danger')
     return render_template('login.html', form=form)
 
-@user_route.route('/signup', methods=['GET', 'POST'])
+@user_route.route('/signup', methods = ['GET', 'POST'])
 def signup():
     form = SignupForm(request.form)
-    session.pop('is_logged_in', None)        
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':
         users = mongo.db.users
         existing_user = users.find_one({'email': request.form['email']})
-        if existing_user is None:
+        if not existing_user:
             hashpass = sha256_crypt.encrypt(str(form.password.data))
-            users.insert({'firstname': request.form['firstname'],
-                          'lastname': request.form['lastname'],
-                          'username' : request.form['username'],
+            users.insert({
                           'email': request.form['email'],
+                          'firstname': request.form['firstname'],
+                          'lastname': request.form['lastname'],
                           'password': hashpass})
             flash('You are now registered and can log in', 'success')
-            return redirect(url_for('user_route.login'))
+            return redirect(url_for('user_route.login', form=form))
         flash('Email already exists', 'danger')
     return render_template('signup.html', form=form)
 
@@ -66,25 +71,26 @@ def signup():
 def logout():
     session.clear()
     flash('You are now logged out', 'danger')
-    return redirect(url_for('user_route.login'))
+    return redirect(url_for('user_routes.login'))
 
 @user_route.route('/feed', methods = ['POST' , 'GET'])
+@is_logged_in
 def feed():
-    form = feed(request.form)
+    form = Feed(request.form)
     posts = mongo.db.posts
     if request.method == 'POST':
         new_post = {
             'title' : request.form['title'],
             # 'image' : request.form['image'],
-            # 'author' : session['username'],
+            'author' : session['username'],
             'body' : request.form['body'],
             'time' : datetime.now()
         }
         posts.insert(new_post)
-    post_list = posts.find({})
+    post_list = list(posts.find({}))
     return render_template('feed.html', form=form, posts=post_list)
 
-class feed(Form):
+class Feed(Form):
     title = StringField('Title')
     body = TextField('Body')
 @user_route.route('/profile', methods = ['GET', 'POST'])
