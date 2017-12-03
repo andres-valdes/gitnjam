@@ -11,11 +11,11 @@ user_route = Blueprint('user_route', __name__)
 
 def is_logged_in(f):
     @wraps(f)
-    def wrap(*args, **kwargs): 
+    def wrap(*args, **kwargs):
         if 'is_logged_in' in session:
             return f(*args, **kwargs)
         flash('Unauthorized, Please login', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('user_route.login'))
     return wrap
 
 @user_route.route('/', methods = ['GET', 'POST'])
@@ -43,7 +43,7 @@ def login():
 @user_route.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm(request.form)
-    session.pop('is_logged_in', None)        
+    session.pop('is_logged_in', None)
     if request.method == 'POST' and form.validate():
         users = mongo.db.users
         existing_user = users.find_one({'email': request.form['email']})
@@ -70,3 +70,7 @@ def logout():
 def feed():
     return render_template('feed.html')
 
+@user_route.route('/profile', methods = ['GET', 'POST'])
+# @is_logged_in
+def profile():
+    return render_template('profile.html')
