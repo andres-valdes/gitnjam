@@ -5,7 +5,7 @@ from models.user_model import SignupForm, LoginForm, Form
 from wtforms import Form, TextField, StringField, validators, PasswordField
 from flask_pymongo import PyMongo
 from functools import wraps
-from config.database import Mongo
+from config.database import Mongo 
 
 
 from flask import Flask
