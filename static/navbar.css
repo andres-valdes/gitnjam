@@ -1,0 +1,16 @@
+.topmenu {
+	background-color: #396afc;
+	text-align: end;
+}
+
+.menuItem {
+	display: inline-block;
+	margin: 20px;
+}
+
+.menuItem a {
+	text-decoration: none;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}

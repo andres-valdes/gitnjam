@@ -1,9 +1,13 @@
-.landing{
+/* .landing::before{
+    background-image: url("../static/img/wallpaper.jpg");
+    background-size: cover;
+}
+.landing::after{
     width: -moz-available;
     height: 1280px;
     background-color: #4866ff; 
     position: absolute;
-}
+} */
 .login-card{
     top:100px;
     position: absolute;
@@ -18,7 +22,69 @@
     -moz-box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
     box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
 }
-.login-bg{
-    background-image: src('../img/wallpaper.jpg');
-    /* background-size: */
+.wallpaper{
+    background-image: url("../static/img/wallpaper.jpg");
+    background-size: cover;
+}
+.landing{
+    background-image:url('../static/img/wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;    
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -2;
+    color:white;
+}
+.landing:after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0, 51, 255, 0.75);
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+#landing-register{
+    position: absolute;
+    border-radius: 50px;
+    top: 530px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: 30px;
+    width: 500px;
+    border: 1px solid rgb(255, 255, 255);
+    background: transparent;
+    color:rgb(255, 255, 255);
+    font-weight: 200;
+}   
+
+#landing-login{
+    position: absolute;
+    border-radius: 50px;
+    top: 600px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: 18px;
+    text-align: center;
+    background: transparent;
+    color:rgb(255, 255, 255);
+    font-weight: 200;
+}   
+
+
+.landing-header{
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+	text-align: center;
+	font-family: Billabong;
+	font-size: 250px;
+	top: 200px;
 }
