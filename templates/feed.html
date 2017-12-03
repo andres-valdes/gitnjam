@@ -34,12 +34,17 @@ $(document).ready(function() {
 
 });
 </script> -->
-<!-- <div class="chatbox">
-<p class="recipient">Dat boi on the line</p>
+
+<div id="chatbox" class="chatbox">
+  <div style="display:flex">
+      <p class="recipient" style="position:absolute; margin:auto; left:0;right:0;"><b>GitnJam - Chatbox</b></p>
+      <button  id="x-button" style="background:transparent; border-radius:0; position:absolute; right:0;"class="pull-right">x</button>
+  </div>
+
 <div id="messages"></div>
-<input type="text" id="myMessage">
-<button id="sendbutton">Send</button>
-</div> -->
+<input type="text" style="border-radius: 50px; width:180px;" id="myMessage">
+<button id="sendbutton" style="background:transparent; color:black;">Send</button>
+</div>
 <div class="feed">
 <div class="topmenu"  style="position:fixed; width:100%;">
     <div class="menuItem"><span class="fa fa-user fa-lg" style="color:white; padding-right:10px;"></span><a href="/profile">My Profile</a></div>
@@ -48,6 +53,7 @@ $(document).ready(function() {
       <header class="navbar-header">GitnJam</header>
     </div>
 </div>
+
 <div class="card" id="newactivity">
     <div class="cardcontainer">
       <h2 class="newsfeed-header"><b>Create a post<b></h2>
@@ -84,8 +90,13 @@ $(document).ready(function() {
         <hr>
         <!-- <h2 class="post-title"><span><b>Post title: </b> </span>{{post['title']}}</h2> -->
         <p>{{post['body']}}</p>   
+<<<<<<< HEAD
           <button id="chat-button" class="btn btn-primary">Chat now  <i class="fa fa-comment" aria-hidden="true"></i></button>
           <a href="/like/{{post['title']}}"><i class="fa fa-heart 2x pull-right" style="color:red"> {{post['likes']}}</i></a>
+=======
+          <button id="chat-button"class="btn btn-primary">Chat now  <i class="fa fa-comment" aria-hidden="true"></i></button>
+          <i class="fa fa-heart 2x pull-right" style="color:red"></i>
+>>>>>>> e76ef22966a9c8cca03bc9390ccabc4043458dc4
           <i class="fa fa-commenting 2x pull-right" style="color:#396afc"></i>
             <!-- <i class="fa fa-heart" aria-hidden="true"></i>
             <i class="fa fa-github" aria-hidden="true"></i>
@@ -124,4 +135,20 @@ $(document).ready(function() {
   </tr>
 </table> -->
 </div>
+<script>
+    $(document).ready(function(){
+      var chatbox = $('#chatbox');
+      var chatbutton = $('#chat-button');
+      var xbutton = $('#x-button');
+  
+      chatbutton.on('click', function(){
+        chatbox.css({display:'block'});
+      })
+      xbutton.on('click', function(){
+        chatbox.css({display:'none'});
+      })
+  
+  
+    });
+  </script>
 {% endblock %}
