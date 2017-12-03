@@ -21,6 +21,7 @@ class LoginForm(Form):
 class SignupForm(Form):
     username = StringField('Username', [validators.Length(min=1, max=50)])
     email = StringField('Email', [validators.Length(min=6, max=50)])
+    github = StringField('GitHub', [validators.Length(min=6, max=50)])
     password = PasswordField('Password',
                              [validators.DataRequired(),
                               validators.Length(min=8, max=50),
