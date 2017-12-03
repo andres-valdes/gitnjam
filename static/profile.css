@@ -84,7 +84,7 @@ p, h1, h2, h3 {
 }
 .profile-bg{
     background-image:url('../static/img/wallpaper.jpg');
-    background-repeat: repeat;    
+    background-repeat: repeat;
     width: 100%;
     position: absolute;
     z-index: -2;
@@ -171,7 +171,7 @@ p, h1, h2, h3 {
 .cardcontainer {
 	padding: 20px;
 	background: #fff;
-	border-radius: 50px; 
+	border-radius: 50px;
 }
 
 #newsfeed {
@@ -269,5 +269,48 @@ p, h1, h2, h3 {
 	position: absolute;
 	width: -moz-fit-content;
 	top: 2px;
-	
+
+}
+
+.chatbox {
+	width: 250px;
+	background: white;
+	box-shadow: 4px 4px 8px 1px rgba(0,0,0,.3);
+	padding: 10px;
+	border-radius: 10px;
+	position: absolute;
+	bottom: 2px;
+	right: 2px;
+}
+
+.chatbox .recipient {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+.chatbox p {
+	list-style-type: none;
+}
+
+.chatbox .myMessage {
+	margin: 3px;
+	color: black;
+	padding: 7px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 0.8em;
+	border-left: 1px solid #396afc;
+}
+
+#messages {
+	overflow-x: scroll;
+	height: 140px;
+}
+
+#sendbutton {
+	background: #396afc;
+	color: white;
+	padding: 5px;
+	border: none;
+	border-radius: 10px;
 }

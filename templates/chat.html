@@ -1,0 +1,22 @@
+{% extends 'layout.html' %} 
+{% block body %}
+<ul id="messages"></ul>
+<input type="text" id="myMessage">
+<button id="sendbutton">Send</button>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var socket = io.connect('http://127.0.0.1:2000');
+        socket.on('connect', function() {
+            socket.send('User has connected! :000000');
+        });
+        socket.on('message', function(msg) {
+            $("#messages").append('<li>'+msg+'</li>');
+            console.log('Received message');
+        });
+        $('#sendbutton').on('click', function() {
+            socket.send($('#myMessage').val());
+            $('#myMessage').val('');
+        });
+    });
+</script>
+{% endblock %}
