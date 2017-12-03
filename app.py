@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from wtforms import Form, StringField, PasswordField, validators, IntegerField, DateField
 from passlib.hash import sha256_crypt
 from flask_socketio import SocketIO, send
+from flask_cors import CORS
 
 from models.user_model import *
 
@@ -11,6 +12,7 @@ from routes.user_routes import user_route
 
 app = Flask(__name__)
 app.register_blueprint(user_route)
+CORS(app)
 
 app.config['MONGO_DBNAME'] = 'gitnjam'
 app.config['MONGO_URI'] = 'mongodb://admin:admin@ds129066.mlab.com:29066/gitnjam'
