@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}" />
 {% extends 'layout.html' %}
-{% from "includes/_formhelpers.html" import render_field %}
 {% block body %}
 {% include 'includes/_messages.html' %}
+{% from "includes/_formhelpers.html" import render_field %}
 <div class="feed">
 <div class="topmenu">
 		<div class="menuItem"><a href="/feed">Home</a></div>
@@ -35,8 +35,8 @@
       <div class="cardcontainer">
         <table>
           <tr>
-            <td width=20%><a href="/profile"><img class="profilepic" src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg"></a></td>
-            <td><h4>{{post['author']}} posted</h4></td>
+            <td width=20%><a href="/profile/{{post['author']}}"><img class="profilepic" src="{{users.find_one({'username' : post['author']})['pic']}}"></a></td>
+            <td><h4>{{post['author']}} posted "{{post['title']}}"</h4></td>
           </tr>
         </table>
         <p>{{post['body']}}</p>

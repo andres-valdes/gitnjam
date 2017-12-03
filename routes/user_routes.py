@@ -88,7 +88,7 @@ def feed():
         }
         posts.insert(new_post)
     post_list = reversed(list(posts.find({})))
-    return render_template('feed.html', form=form, posts=post_list)
+    return render_template('feed.html', form=form, posts=post_list, users=mongo.db.users)
 
 @user_route.route('/profile', methods = ['GET', 'POST'])
 @is_logged_in
@@ -107,4 +107,4 @@ def profile(username):
     for post in post_list:
         if post['author'] == username:
             posts_by_user.append(post)
-    return render_template('profile.html', posts_by_user=posts_by_user)
+    return render_template('profile.html', posts_by_user=posts_by_user, user=mongo.db.users.find_one({'username' : username}))
