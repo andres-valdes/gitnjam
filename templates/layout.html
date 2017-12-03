@@ -9,15 +9,15 @@
 
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="../static/profile.css">
+	<link rel="stylesheet" href="../static/navbar.css">
 	<link rel="stylesheet" href="../static/style.css">
 	<title>gitnjam</title>
 </head>
 <body>
 	<div>
-        {% if is_logged_in %}
-        {% include 'includes/_navbar.html' %}
-        {% endif %}
-        
+		{% if is_logged_in %}
+		{% include 'includes/_navbar.html' %}
+		{% endif %}
 		{% block body %}
 		{% endblock %}
 	</div>

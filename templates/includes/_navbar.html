@@ -1,7 +1,7 @@
 {% if session.is_logged_in %} 
 <div></div>
 {% else %}
-<nav class="navbar-inverse">
+<!-- <nav class="navbar-inverse">
  <div class="container">
    <div class="navbar-header">
      <a class="navbar-brand">gitnjam</a>
@@ -11,5 +11,10 @@
      </ul>
    </div>
  </div>
-</nav>
+</nav> -->
+<div class="topmenu" >
+		<div class="menuItem"><a href="#">Login</a></div>
+		<div class="menuItem"><a href="#">Register</a></div>
+		<div class="menuItem"><a href="#">Feedback</a></div>
+	</div>
 {% endif %}

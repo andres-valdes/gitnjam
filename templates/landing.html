@@ -3,9 +3,12 @@
 {% from "includes/_formhelpers.html" import render_field %}
 {% block body %}
 {% include 'includes/_messages.html' %}
-<div class="landing">
-        <div class="login-card">
-            
-        </div>
-</div>
+    <div class="landing">   
+            <!-- <div class="login-card">             -->
+                <h1 class="landing-header">GitnJam</h1>
+                <a href="/login"><button type="" id="landing-register" class="btn btn-primary">Login</button></a>
+                <a href=""><span id="landing-login">Click here to <u>register</u></span></a>  
+        </div>        
+    </div>
+
 {% endblock %}

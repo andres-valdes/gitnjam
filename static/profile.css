@@ -1,22 +1,11 @@
+@font-face {
+    font-family: 'Billabong';
+    src: url('./fonts/Billabong/Billabong.ttf'); /* IE9 Compat Modes */
+}
+
 html, body {
 	padding: 0;
 	margin: 0;
-}
-
-.topmenu {
-	background-color: #396afc;
-}
-
-.menuItem {
-	display: inline-block;
-	margin: 20px;
-}
-
-.menuItem a {
-	text-decoration: none;
-	color: white;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
 }
 
 .profileImage {

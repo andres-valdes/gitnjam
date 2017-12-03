@@ -1,13 +1,14 @@
-/* .landing::before{
-    background-image: url("../static/img/wallpaper.jpg");
-    background-size: cover;
-}
-.landing::after{
+/* LOGIN */
+.login-card-container{
     width: -moz-available;
-    height: 1280px;
-    background-color: #4866ff; 
-    position: absolute;
-} */
+    padding: 50px;
+}
+#login-submit{
+    border-radius:50px !important;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.3);
+    color:black;
+}
 .login-card{
     top:100px;
     position: absolute;
@@ -30,7 +31,7 @@
     width: 100%;
     position: absolute;
     z-index: -2;
-    color:white;
+    color:rgb(0, 0, 0);
 }
 .landing:after{
     content: '';
@@ -55,7 +56,6 @@
     width: 500px;
     border: 1px solid rgb(255, 255, 255);
     background: transparent;
-    color:rgb(255, 255, 255);
     font-weight: 200;
 }   
 
@@ -64,28 +64,8 @@
     padding: 50px;
 }
 
-#landing-login{
-    position: absolute;
-    border-radius: 50px;
-    top: 600px;
-    margin: auto;
-    left: 0;
-    right: 0;
-    font-size: 18px;
+#login-heading{
+    font-family: Billabong;
+    font-size: 80px;
     text-align: center;
-    background: transparent;
-    color:rgb(255, 255, 255);
-    font-weight: 200;
-}   
-
-
-.landing-header{
-	position: absolute;
-	margin: auto;
-	left: 0;
-	right: 0;
-	text-align: center;
-	font-family: Billabong;
-	font-size: 250px;
-	top: 200px;
 }
