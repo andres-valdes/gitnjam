@@ -6,7 +6,7 @@
 <div class="feed">
 <div class="topmenu">
 		<div class="menuItem"><span class="fa fa-user fa-lg" style="color:white; padding-right:10px;"></span><a href="/profile">My Profile</a></div>    
-    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="#">Logout</a></div>
+    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="/logout">Logout</a></div>
     
 </div>
 <div class="card" id="newactivity">
@@ -14,7 +14,7 @@
       <h2 class="newsfeed-header">Create a post</h2>
       <form action="/feed" method="POST">
         <div class="form-group">
-          {{render_field(form.title, placeholder="Project HQ", class_="form-control")}}
+          {{render_field(form.title, placeholder="Project Title", class_="form-control")}}
         </div>
         <div class="form-group">
           {{render_field(form.body ,  placeholder="The next big thing...",class_="form-control")}}
@@ -33,11 +33,24 @@
         <table>
           <tr>
             <td width=20%><a href="/profile/{{post['author']}}"><img class="profilepic" src="{{users.find_one({'username' : post['author']})['pic']}}"></a></td>
-            <td><h4>{{post['author']}} posted "{{post['title']}}"</h4></td>
+            <td>
+              <div>
+              <h2><b>{{post['author']}}</b> posted "{{post['title']}}"</h2> 
+              </div>
+            </td>
+        <td>
+        </td>      
           </tr>
+          
         </table>
-        <p>{{post['body']}}</p>
-        <span class="time">{{post['time']}}</span>
+        <!-- <h2 class="post-title"><span><b>Post title: </b> </span>{{post['title']}}</h2> -->
+        <p><b>Post Details:  </b>{{post['body']}}</p>   
+          <button id="chat-button" class="btn btn-primary">Chat now   <i class="fa fa-comment" aria-hidden="true"></i></button>
+            <!-- <i class="fa fa-heart" aria-hidden="true"></i>
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <i class="fa fa-weixin" aria-hidden="true"></i>                       -->
+
+        <!-- <span class="time">{{post['time']}}</span> -->
       </div>
     </div>
     {% endfor %}

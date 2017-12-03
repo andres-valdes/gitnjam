@@ -4,21 +4,20 @@
 {% from "includes/_formhelpers.html" import render_field %}
 {% block body %}
 {% include 'includes/_messages.html' %}
-<div>
+<div class="profile-bg">
 <div class="topmenu">
 		<div class="menuItem"><span class="fa fa-rss fa-lg" style="color:white; padding-right:10px;"></span><a href="/feed">Feed</a></div>
-		<div class="menuItem"><span class="fa fa-user fa-lg" style="color:white; padding-right:10px;"></span><a href="/profile">My Profile</a></div>
     <!-- <div class="menuItem">
       <input type="text" class="searchbox" placeholder="Search"/>
     </div> -->
     <!-- <div class="menuItem"></div><a href="/"  id="navbar-header">GitnJam</a></div>     -->
-    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="#">Logout</a></div>
+    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="/logout">Logout</a></div>
 </div>
 <div class="profilediv">
 <table class="profiletable" width="100%">
   <tr>
     <td width=25% align="center">
-      <img class="profilepic" src="{{user['pic']}}" />
+      <img id="profilepic" src="{{user['pic']}}" />
     </td>
     <td >
       <h2>{{user['username']}}</h2>
@@ -29,7 +28,10 @@
   			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
   			consequat. <br />
   		</p>
-      <p>Github:<span class="link">/tom</span>  Linkedin:<span class="link">/tom</span> Devpost:<span class="link">/tom</span></p>
+      <!-- <p>Github:<span class="link">/tom</span>  Linkedin:<span class="link">/tom</span> Devpost:<span class="link">/tom</span></p> -->
+      <i class="fa fa-github fa-lg"></i>
+      <i class="fa fa-linkedin fa-lg"></i>
+      <i class="fa fa-medium fa-lg"></i>
     </td>
   </tr>
 </table>
@@ -40,7 +42,7 @@
     <td valign="top">
         <div class="card" id="newsfeed">
             <div class="cardcontainer">
-              <h2>News Feed</h2>
+              <h2 style="text-align:center">News Feed</h2>
               {% for post in posts_by_user %}
               <div class="card">
                 <div class="cardcontainer">
@@ -61,12 +63,13 @@
     <td width="30%" valign="top">
       <div class="card">
         <div class="cardcontainer">
-          <h4>Contact & Personal Info</h4>
-          <p>Email: <span class="highlight">tom@myspace.com</span></p>
-          <p>Website: <span class="highlight">myspace.com</span></p>
-          <p>Birthday: <span class="highlight">July 3rd</span></p>
-          <p>School: <span class="highlight">Some University</span></p>
-          <p>Career: <span class="highlight">Developer</span></p>
+          <div class="bio-description">
+              <h4>Contact & Personal Info</h4>
+              <p><b>Email:</b> <span class="highlight">tom@myspace.com</span></p>
+              <p><b>Website:</b> <span class="highlight">myspace.com</span></p>
+              <p><b>School: </b><span class="highlight">Some University</span></p>
+              <p><b>Major: </b><span class="highlight">Developer</span></p>
+          </div>
         </div>
       </div>
     </td>

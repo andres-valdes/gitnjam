@@ -84,7 +84,6 @@ def feed():
             # 'image' : request.form['image'],
             'author' : session['username'],
             'body' : request.form['body'],
-            'time' : datetime.now()
         }
         posts.insert(new_post)
     post_list = reversed(list(posts.find({})))
@@ -97,7 +96,7 @@ def redir_profile():
 
 class Feed(Form):
     title = StringField('Project Title',  [validators.Length(min=1, max=50)])
-    body = TextAreaField('Project Description',  [validators.Length(min=5, max=50)])
+    body = TextAreaField('Project Description',  [validators.Length(min=5, max=500)])
 @user_route.route('/profile/<string:username>', methods = ['GET', 'POST'])
 @is_logged_in
 def profile(username):
