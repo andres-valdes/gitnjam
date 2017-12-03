@@ -5,22 +5,22 @@ from models.user_model import SignupForm, LoginForm, Form
 from wtforms import Form, TextField, StringField, validators, PasswordField, TextAreaField
 from flask_pymongo import PyMongo
 from functools import wraps
-from config.database import Mongo 
+from config.database import Mongo
 
 
 from flask import Flask
 
-app = Flask(__name__) 
+app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'gitnjam'
 app.config['MONGO_URI'] = 'mongodb://localhost/gitnjam'
 
-mongo = PyMongo(app) 
+mongo = PyMongo(app)
 
 user_route = Blueprint('user_route', __name__)
 
 def is_logged_in(f):
     @wraps(f)
-    def wrap(*args, **kwargs): 
+    def wrap(*args, **kwargs):
         if 'is_logged_in' in session:
             return f(*args, **kwargs)
         flash('Unauthorized, Please login', 'danger')

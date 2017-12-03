@@ -1,12 +1,48 @@
+
 <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}" />
 {% extends 'layout.html' %}
 {% block body %}
 {% include 'includes/_messages.html' %}
 {% from "includes/_formhelpers.html" import render_field %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+	var socket = io.connect('http://127.0.0.1:5000');
+
+	socket.on('connect', function() {
+		socket.send('User has connected!');
+    socket.emit('greet', 'hello world')
+	});
+
+  console.log('setting timeout')
+  setInterval(() => {
+    console.log('Holla at ya boi')
+    socket.send('greet');
+    socket.emit('greet')
+  }, 2000)
+
+	socket.on('message', function(msg) {
+		$("#messages").append('<div width="50%"><p class=myMessage><span style="font-size: .7em">Person:</span><br/>'+msg+'</p></div>');
+		console.log('Received message');
+	});
+
+	$('#sendbutton').on('click', function() {
+		socket.send($('#myMessage').val());
+		$('#myMessage').val('');
+	});
+
+});
+</script>
+<div class="chatbox">
+<p class="recipient">Dat boi on the line</p>
+<div id="messages"></div>
+<input type="text" id="myMessage">
+<button id="sendbutton">Send</button>
+</div>
 <div class="feed">
 <div class="topmenu">
-    <div class="menuItem"><span class="fa fa-user fa-lg" style="color:white; padding-right:10px;"></span><a href="/profile">My Profile</a></div>    
-    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="/logout">Logout</a></div>    
+    <div class="menuItem"><span class="fa fa-user fa-lg" style="color:white; padding-right:10px;"></span><a href="/profile">My Profile</a></div>
+    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="/logout">Logout</a></div>
     <div>
       <header class="navbar-header">GitnJam</header>
     </div>
@@ -37,13 +73,13 @@
             <td width=20%><a href="/profile/{{post['author']}}"><img class="profilepic" src="{{users.find_one({'username' : post['author']})['pic']}}"></a></td>
             <td>
               <div>
-              <h2><b>{{post['author']}}</b> posted "{{post['title']}}"</h2> 
+              <h2><b>{{post['author']}}</b> posted "{{post['title']}}"</h2>
               </div>
             </td>
         <td>
-        </td>      
+        </td>
           </tr>
-          
+
         </table>
         <hr>
         <!-- <h2 class="post-title"><span><b>Post title: </b> </span>{{post['title']}}</h2> -->
