@@ -4,25 +4,60 @@
 {% from "includes/_formhelpers.html" import render_field %}
 {% block body %}
 {% include 'includes/_messages.html' %}
-<!-- <div class="topmenu">
-		<div class="menuItem"><a href="#">Home</a></div>
-		<div class="menuItem"><a href="#">Dashboard</a></div>
-		<div class="menuItem"><a href="#">Feedback</a></div>
-		<div class="menuItem"><a href="#">Ideas</a></div>
-	</div> -->
-	<div class="profileinfo">
-		<div class="profileItem">
-			<img class="profileImage" src="https://lovelace-media.imgix.net/uploads/259/da8e6e30-0a0e-0132-07c7-0eae5eefacd9.jpg?w=740&h=740&fit=crop&crop=faces&auto=format&q=70">
-		</div>
-		<div class="profileItem">
-			<h2>Tom From Myspace (Front-End Developer)</h2>
-			<p>
-				Location: FIU! <br />
-				Bio Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. <br />
-			</p>
-		</div>
-	</div>
+<div>
+<div class="topmenu">
+		<div class="menuItem"><a href="/feed">Feed</a></div>
+    <!-- <div class="menuItem">
+      <input type="text" class="searchbox" placeholder="Search"/>
+    </div> -->
+    <div class="menuItem" style="float: right;"><a href="#">Logout</a></div>
+</div>
+<div class="profilediv">
+<table class="profiletable" width="100%">
+  <tr>
+    <td width=25% align="center">
+      <img class="profilepic" src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg" />
+    </td>
+    <td >
+      <h2>Tom From Myspace (Front-End Developer)</h2>
+  		<p class="bio">
+  			<b>Location:</b> FIU! <br />
+  			<b>Bio:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  			consequat. <br />
+  		</p>
+      <p>Github:<span class="link">/tom</span>  Linkedin:<span class="link">/tom</span> Devpost:<span class="link">/tom</span></p>
+    </td>
+  </tr>
+</table>
+</div>
+
+<table width="100%">
+  <tr>
+    <td valign="top">
+      <div class="card">
+        <div class="cardcontainer">
+          <h2>New Activity</h2>
+          <input type="text" class="titletext" placeholder="Title" /> <br/>
+          <textarea class="activitytext" placeholder="Insert content here!"></textarea> <br />
+          <button class="button">Submit!</button>
+        </div>
+      </div>
+    </td>
+    <td width="30%" valign="top">
+      <div class="card">
+        <div class="cardcontainer">
+          <h4>Contact & Personal Info</h4>
+          <p>Email: <span class="highlight">tom@myspace.com</span></p>
+          <p>Website: <span class="highlight">myspace.com</span></p>
+          <p>Birthday: <span class="highlight">July 3rd</span></p>
+          <p>School: <span class="highlight">Some University</span></p>
+          <p>Career: <span class="highlight">Developer</span></p>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>
 {% endblock %}
