@@ -38,7 +38,7 @@ $(document).ready(function() {
 <div id="chatbox" class="chatbox">
   <div style="display:flex">
       <p class="recipient" style="position:absolute; margin:auto; left:0;right:0;"><b>GitnJam - Chatbox</b></p>
-      <button  style="background:transparent; border-radius:0; position:absolute; right:0;"class="pull-right">x</button>
+      <button  id="x-button" style="background:transparent; border-radius:0; position:absolute; right:0;"class="pull-right">x</button>
   </div>
 
 <div id="messages"></div>
@@ -134,10 +134,15 @@ $(document).ready(function() {
     $(document).ready(function(){
       var chatbox = $('#chatbox');
       var chatbutton = $('#chat-button');
+      var xbutton = $('#x-button');
   
       chatbutton.on('click', function(){
         chatbox.css({display:'block'});
       })
+      xbutton.on('click', function(){
+        chatbox.css({display:'none'});
+      })
+  
   
     });
   </script>
