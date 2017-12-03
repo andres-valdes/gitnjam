@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 from flask_pymongo import PyMongo
 from wtforms import Form, StringField, PasswordField, validators, IntegerField, DateField
 from passlib.hash import sha256_crypt
+from flask_socketio import SocketIO, send
 
 from models.user_model import *
 
@@ -27,6 +28,19 @@ def is_logged_in(f):
 @app.errorhandler(404)
 def page_not_found(error): 
     return render_template('page_not_found.html'), 404
+
+socketio = SocketIO(app)
+
+@app.route('/chat', methods= ['POST', 'GET'])
+def chat():
+    return render_template('chat.html')
+
+@socketio.on('message')
+def handleMessage(msg):
+	print('Message: ' + msg)
+	send(msg, broadcast=True)
+
 if __name__ == '__main__':
     app.config['SECRET_KEY'] = 'gitnjam'
+    socketio.run(app, port = 2000)
     app.run(host="0.0.0.0", port=2000, debug=True)
