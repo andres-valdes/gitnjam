@@ -90,6 +90,11 @@ def feed():
     post_list = reversed(list(posts.find({})))
     return render_template('feed.html', form=form, posts=post_list)
 
+@user_route.route('/profile', methods = ['GET', 'POST'])
+@is_logged_in
+def redir_profile():
+    return profile(session['username'])
+
 class Feed(Form):
     title = StringField('Title')
     body = TextField('Body')
@@ -101,5 +106,5 @@ def profile(username):
     posts_by_user = []
     for post in post_list:
         if post['author'] == username:
-            posts_by_user.insert(0, post)
+            posts_by_user.append(post)
     return render_template('profile.html', posts_by_user=posts_by_user)
