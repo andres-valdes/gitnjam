@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Flask, render_template, request, session, redirect, url_for, flash, Blueprint
 from passlib.hash import sha256_crypt
-from models.user_model import LoginForm, SignupForm, Users, UserView
+from models.user_model import *
 from flask_pymongo import PyMongo
 from functools import wraps
 from config.database import Mongo
@@ -70,19 +70,25 @@ def logout():
 
 @user_route.route('/feed', methods = ['POST' , 'GET'])
 def feed():
+    form = feed(request.form)
     posts = mongo.db.posts
     if request.method == 'POST':
         new_post = {
             'title' : request.form['title'],
             # 'image' : request.form['image'],
-            'author' : session['username'],
+            # 'author' : session['username'],
             'body' : request.form['body'],
             'time' : datetime.now()
         }
         posts.insert(new_post)
-    return render_template('feed.html', posts=posts)
+    post_list = posts.find({})
+    return render_template('feed.html', form=form, posts=post_list)
 
+class feed(Form):
+    title = StringField('Title')
+    body = TextField('Body')
 @user_route.route('/profile', methods = ['GET', 'POST'])
+
 # @is_logged_in
 def profile():
     return render_template('profile.html')

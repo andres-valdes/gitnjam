@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, validators, PasswordField
+from wtforms import Form, TextField, StringField, validators, PasswordField
 from flask_admin.contrib.pymongo import ModelView
 from config.database import Mongo
 
