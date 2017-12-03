@@ -79,13 +79,12 @@ p, h1, h2, h3 {
 }
 
 .profilediv {
-    background-image:url('../static/img/wallpaper.jpg');
+	/* background-image:url('../static/img/wallpaper.jpg'); */
+	/* padding: 0 180px; */
 }
 .profile-bg{
     background-image:url('../static/img/wallpaper.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;    
-
+    background-repeat: repeat;    
     width: 100%;
     position: absolute;
     z-index: -2;
@@ -132,7 +131,7 @@ p, h1, h2, h3 {
 
 .profiletable {
 	color: white;
-	background-color: rgb(9, 56, 185, 0.8);
+	background-color: transparent;
 }
 
 .button {
@@ -247,4 +246,28 @@ p, h1, h2, h3 {
 	right: 0;
 	width: 500px;
 	text-align: center;
+}
+
+.profiletable i{
+	padding: 0 20px;
+}
+.profiletable a{
+	text-decoration: none;
+	color:white;
+}
+.profiletable a:link{
+	text-decoration: none;
+}
+.navbar-header{
+	font-family: Billabong;
+	font-size: 40px;
+	text-shadow: 2px 2px #000;
+	color: white;
+	margin: auto;
+	left: 0;
+	right: 0;
+	position: absolute;
+	width: -moz-fit-content;
+	top: 2px;
+	
 }

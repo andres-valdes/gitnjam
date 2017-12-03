@@ -12,6 +12,10 @@
     </div> -->
     <!-- <div class="menuItem"></div><a href="/"  id="navbar-header">GitnJam</a></div>     -->
     <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="/logout">Logout</a></div>
+        
+    <div>
+        <header class="navbar-header">GitnJam</header>
+      </div>
 </div>
 <div class="profilediv">
 <table class="profiletable" width="100%">
@@ -22,16 +26,16 @@
     <td >
       <h2>{{user['username']}}</h2>
   		<p class="bio">
-  			<b>Location:</b> FIU! <br />
+  			<b>School:</b> Florida International University <br />
   			<b>Bio:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
   			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
   			consequat. <br />
   		</p>
       <!-- <p>Github:<span class="link">/tom</span>  Linkedin:<span class="link">/tom</span> Devpost:<span class="link">/tom</span></p> -->
-      <i class="fa fa-github fa-lg"></i>
-      <i class="fa fa-linkedin fa-lg"></i>
-      <i class="fa fa-medium fa-lg"></i>
+      <a  href="github.com" target="_blank"> <i class="fa fa-github fa-lg"></i></a>
+      <a  href="linkedin.com" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+      <a  href="medium.com" target="_blank"><i class="fa fa-medium fa-lg"></i></a>
     </td>
   </tr>
 </table>
@@ -60,9 +64,25 @@
             </div>
           </div>
     </td>
-    <td width="30%" valign="top">
-        <div class="github-card" data-user="lepture"></div>
-        <script src="https://cdn.jsdelivr.net/gh/lepture/github-cards@latest/jsdelivr/widget.js"></script>
+    <td valign="top">
+        <div class="card" id="newsfeed">
+            <div class="cardcontainer">
+              <h2 style="text-align:center">Github Info</h2>
+              <div class="card">
+                <div class="cardcontainer">
+                    <div class="bio-description">
+                        <p><b>Repositories</b> <span class="highlight">tom@myspace.com</span></p>
+                        <p><b>Website:</b> <span class="highlight">myspace.com</span></p>
+                        <p><b>School: </b><span class="highlight">Some University</span></p>
+                        <p><b>Major: </b><span class="highlight">Developer</span></p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </td>
+<!-- 
+    <td width="50%" valign="top">
       <div class="card">
         <div class="cardcontainer">
           <div class="bio-description">
@@ -74,7 +94,8 @@
           </div>
         </div>
       </div>
-    </td>
+    </td> -->
+
   </tr>
 </table>
 </div>
