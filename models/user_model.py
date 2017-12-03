@@ -19,8 +19,7 @@ class LoginForm(Form):
                               validators.Length(min=8, max=50)])
 
 class SignupForm(Form):
-    firstname = StringField('First Name', [validators.Length(min=1, max=50)])
-    lastname = StringField('Last Name', [validators.Length(min=1, max=50)])
+    username = StringField('Username', [validators.Length(min=1, max=50)])
     email = StringField('Email', [validators.Length(min=6, max=50)])
     password = PasswordField('Password',
                              [validators.DataRequired(),
@@ -31,8 +30,7 @@ class SignupForm(Form):
                                      [validators.DataRequired()])
 
 class Users(Form):
-    firstname = StringField('First Name', [validators.Length(min=1, max=50)])
-    lastname = StringField('Last Name', [validators.Length(min=1, max=50)])
+    username = StringField('Username', [validators.Length(min=1, max=50)])
     email = StringField('Email', [validators.Length(min=6, max=50)])
 
 class UserView(ModelView):

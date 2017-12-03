@@ -41,9 +41,9 @@ def login():
             password = login_user['password']
             password_candidate = request.form['password']
             if sha256_crypt.verify(password_candidate, password):
-                session['username'] = request.form['username']
+                session['username'] = login_user['username']
                 session['is_logged_in'] = True
-                return redirect(url_for('user_route.feed'))
+                return redirect(url_for('user_route.feed', form=form))
 
         flash('Invalid Password or Email combination', 'danger')
     return render_template('login.html', form=form)
@@ -58,8 +58,7 @@ def signup():
             hashpass = sha256_crypt.encrypt(str(form.password.data))
             users.insert({
                           'email': request.form['email'],
-                          'firstname': request.form['firstname'],
-                          'lastname': request.form['lastname'],
+                          'username': request.form['username'],
                           'password': hashpass})
             flash('You are now registered and can log in', 'success')
             return redirect(url_for('user_route.login', form=form))
