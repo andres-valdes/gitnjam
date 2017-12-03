@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.register_blueprint(user_route)
 
 app.config['MONGO_DBNAME'] = 'gitnjam'
-app.config['MONGO_URI'] = 'mongodb://localhost/gitnjam'
+app.config['MONGO_URI'] = 'mongodb://admin:admin@ds129066.mlab.com:29066/gitnjam'
 mongo = PyMongo(app) 
 
 def is_logged_in(f): 
