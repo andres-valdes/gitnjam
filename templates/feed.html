@@ -7,7 +7,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	var socket = io.connect('http://127.0.0.1:5000');
+	var socket = io.connect('http://' + document.domain + ':5000');
 
 	socket.on('connect', function() {
 		socket.send('User has connected!');
@@ -17,6 +17,7 @@ $(document).ready(function() {
   console.log('setting timeout')
   setInterval(() => {
     console.log('Holla at ya boi')
+    console.log(document.domain)
     socket.send('greet');
     socket.emit('greet')
   }, 2000)
