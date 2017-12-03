@@ -1,6 +1,9 @@
 .topmenu {
-	background-color: #396afc;
-	text-align: end;
+	background-color: #264cbf;
+	padding: 0px 330px;
+	-webkit-box-shadow: 2px 10px 51px 1px rgba(0,0,0,0.37);
+	-moz-box-shadow: 2px 10px 51px 1px rgba(0,0,0,0.37);
+	box-shadow: 2px 10px 51px 1px rgba(0,0,0,0.37);
 }
 
 .menuItem {

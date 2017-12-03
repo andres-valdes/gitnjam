@@ -5,15 +5,25 @@
 {% include 'includes/_messages.html' %}
 <div class="feed">
 <div class="topmenu">
+		<div class="menuItem"><a href="/feed">Home</a></div>
 		<div class="menuItem"><a href="/profile">My Profile</a></div>
     <!-- <div class="menuItem">
       <input type="text" class="searchbox" placeholder="Search"/>
     </div> -->
     <div class="menuItem" style="float: right;"><a href="#">Logout</a></div>
 </div>
+<div class="card" id="newactivity">
+    <div class="cardcontainer">
+      <h2>Create a post</h2>
+      <input type="text" class="titletext" placeholder="Title" /> <br/>
+      <textarea class="activitytext" placeholder="Insert content here!"></textarea> <br />
+      <button id = "post-activity-btn" class="button btn-block btn-lg">Submit!</button>
+    </div>
+</div>
 <div class="card" id="newsfeed">
   <div class="cardcontainer">
     <h2>News Feed</h2>
+
     <div class="card">
       <div class="cardcontainer">
         <table>
