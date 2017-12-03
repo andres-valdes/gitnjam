@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Flask, render_template, request, session, redirect, url_for, flash, Blueprint
 from passlib.hash import sha256_crypt
 from models.user_model import LoginForm, SignupForm, Users, UserView
@@ -68,5 +70,15 @@ def logout():
 
 @user_route.route('/feed', methods = ['POST' , 'GET'])
 def feed():
-    return render_template('feed.html')
+    posts = mongo.db.posts
+    if request.method == 'POST':
+        new_post = {
+            'title' : request.form['title'],
+            'image' : request.form['image'],
+            'author' : session['username'],
+            'body' : request.form['body'],
+            'time' : datetime.now()
+        }
+        posts.insert(new_post)
+    return render_template('feed.html', posts=posts)
 
