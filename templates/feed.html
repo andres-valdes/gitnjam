@@ -14,10 +14,10 @@
       <h2 class="newsfeed-header">Create a post</h2>
       <form action="/feed" method="POST">
         <div class="form-group">
-          {{render_field(form.title, class_="form-control")}}
+          {{render_field(form.title, placeholder="Project HQ", class_="form-control")}}
         </div>
         <div class="form-group">
-          {{render_field(form.body ,class_="form-control")}}
+          {{render_field(form.body ,  placeholder="The next big thing...",class_="form-control")}}
         </div>
         <!-- <textarea class="activitytext" placeholder="Insert content here!"></textarea> <br /> -->
         <button id = "post-activity-btn" class="button btn-block btn-lg">Post</button>
