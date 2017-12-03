@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, request, session, redirect, url_for, flash, Blueprint
 from passlib.hash import sha256_crypt
 from models.user_model import SignupForm, LoginForm, Form
-from wtforms import Form, TextField, StringField, validators, PasswordField
+from wtforms import Form, TextField, StringField, validators, PasswordField, TextAreaField
 from flask_pymongo import PyMongo
 from functools import wraps
 from config.database import Mongo 
@@ -78,7 +78,7 @@ def logout():
 def feed():
     form = Feed(request.form)
     posts = mongo.db.posts
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
         new_post = {
             'title' : request.form['title'],
             # 'image' : request.form['image'],
@@ -96,8 +96,8 @@ def redir_profile():
     return profile(session['username'])
 
 class Feed(Form):
-    title = StringField('Title')
-    body = TextField('Body')
+    title = StringField('Project Title',  [validators.Length(min=1, max=50)])
+    body = TextAreaField('Project Description',  [validators.Length(min=5, max=50)])
 @user_route.route('/profile/<string:username>', methods = ['GET', 'POST'])
 @is_logged_in
 def profile(username):

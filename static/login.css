@@ -8,11 +8,12 @@
     background: transparent;
     border: 1px solid rgba(0,0,0,0.3);
     color:black;
+    margin-top: 20px;
 }
 .login-card{
     top:100px;
     position: absolute;
-    height:600px;
+    height:480px;
     width:550px;
     background-color:rgba(255,255,255,1);
     border-radius:50px;
@@ -66,6 +67,6 @@
 
 #login-heading{
     font-family: Billabong;
-    font-size: 80px;
+    font-size: 90px;
     text-align: center;
 }
