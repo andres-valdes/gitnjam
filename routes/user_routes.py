@@ -13,6 +13,7 @@ from flask import Flask
 app = Flask(__name__) 
 app.config['MONGO_DBNAME'] = 'gitnjam'
 app.config['MONGO_URI'] = 'mongodb://localhost/gitnjam'
+
 mongo = PyMongo(app) 
 
 user_route = Blueprint('user_route', __name__)
@@ -51,8 +52,8 @@ def login():
 @user_route.route('/signup', methods = ['GET', 'POST'])
 def signup():
     form = SignupForm(request.form)
+    users = mongo.db.users
     if request.method == 'POST':
-        users = mongo.db.users
         existing_user = users.find_one({'email': request.form['email']})
         if not existing_user:
             hashpass = sha256_crypt.encrypt(str(form.password.data))
@@ -92,8 +93,13 @@ def feed():
 class Feed(Form):
     title = StringField('Title')
     body = TextField('Body')
-@user_route.route('/profile', methods = ['GET', 'POST'])
-
-# @is_logged_in
-def profile():
-    return render_template('profile.html')
+@user_route.route('/profile/<string:username>', methods = ['GET', 'POST'])
+@is_logged_in
+def profile(username):
+    posts = mongo.db.posts
+    post_list = reversed(list(posts.find({})))
+    posts_by_user = []
+    for post in post_list:
+        if post['author'] == username:
+            posts_by_user.insert(0, post)
+    return render_template('profile.html', posts_by_user=posts_by_user)

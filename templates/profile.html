@@ -37,14 +37,25 @@
 <table width="100%">
   <tr>
     <td valign="top">
-      <div class="card">
-        <div class="cardcontainer">
-          <h2>New Activity</h2>
-          <input type="text" class="titletext" placeholder="Title" /> <br/>
-          <textarea class="activitytext" placeholder="Insert content here!"></textarea> <br />
-          <button class="button">Submit!</button>
-        </div>
-      </div>
+        <div class="card" id="newsfeed">
+            <div class="cardcontainer">
+              <h2>News Feed</h2>
+              {% for post in posts_by_user %}
+              <div class="card">
+                <div class="cardcontainer">
+                  <table>
+                    <tr>
+                      <td width=20%><a href="/profile"><img class="profilepic" src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg"></a></td>
+                      <td><h4>{{post['author']}} posted</h4></td>
+                    </tr>
+                  </table>
+                  <p>{{post['body']}}</p>
+                  <span class="time">{{post['time']}}</span>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
     </td>
     <td width="30%" valign="top">
       <div class="card">
