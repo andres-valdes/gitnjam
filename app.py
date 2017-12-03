@@ -17,7 +17,7 @@ CORS(app)
 app.config['MONGO_DBNAME'] = 'gitnjam'
 app.config['MONGO_URI'] = 'mongodb://admin:admin@ds129066.mlab.com:29066/gitnjam'
 app.config['SECRET_KEY'] = 'mysecret'
-socketio = SocketIO(app)
+# socketio = SocketIO(app)
 mongo = PyMongo(app)
 
 def is_logged_in(f):
@@ -29,33 +29,33 @@ def is_logged_in(f):
         return redirect(url_for('user_route.login'))
     return wrap
 
-@socketio.on('message')
-def handleMessage(msg):
-	print('Message: ' + msg)
-	send(msg, broadcast=True)
+# @socketio.on('message')
+# def handleMessage(msg):
+# 	print('Message: ' + msg)
+# 	send(msg, broadcast=True)
 
-@socketio.on('greet')
-def handleGreet(greet):
-    print('another event that could be ballin.....' + greet)
-    return 'cool story bro'
+# @socketio.on('greet')
+# def handleGreet(greet):
+#     print('another event that could be ballin.....' + greet)
+#     return 'cool story bro'
 
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
-socketio = SocketIO(app)
+# socketio = SocketIO(app)
 
-@app.route('/chat', methods= ['POST', 'GET'])
-def chat():
-    return render_template('chat.html')
+# @app.route('/chat', methods= ['POST', 'GET'])
+# def chat():
+#     return render_template('chat.html')
 
-@socketio.on('message')
-def handleMessage(msg):
-	print('Message: ' + msg)
-	send(msg, broadcast=True)
+# @socketio.on('message')
+# def handleMessage(msg):
+# 	print('Message: ' + msg)
+# 	send(msg, broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    # socketio.run(app)
     app.config['SECRET_KEY'] = 'gitnjam'
-    socketio.run(app, port = 2000)
+    # socketio.run(app, port = 2000)
     app.run(threaded=True, host="0.0.0.0", port=2000, debug=True)

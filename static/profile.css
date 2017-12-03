@@ -175,11 +175,21 @@ p, h1, h2, h3 {
 }
 
 #newsfeed {
-	width: 60%;
-	margin:20px auto;
-	background: white;
+		max-width: 60%;
+		width: 100%;
+		/* margin: 20px 330px; */
+		background: white;
+		left:0;
+		right:0;
+		margin: auto;
 }
 
+#newsfeed2{
+	max-width: 600px;
+	width: 60%;
+	margin:20px 20px;
+	background: white;
+}
 .cardcontainer .highlight {
 	color: #396afc;
 }
@@ -314,3 +324,9 @@ p, h1, h2, h3 {
 	border: none;
 	border-radius: 10px;
 }
+.profile-feed-header{
+	    text-align: center;
+	    color:black;
+	}
+	
+	
