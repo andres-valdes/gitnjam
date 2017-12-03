@@ -26,16 +26,11 @@
     <td >
       <h2>{{user['username']}}</h2>
   		<p class="bio">
-  			<b>School:</b> Florida International University <br />
-  			<b>Bio:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  			consequat. <br />
+  			<b>Location:</b> FIU! <br />
+  			<b>Bio:</b> {{user['bio']}} <br />
   		</p>
       <!-- <p>Github:<span class="link">/tom</span>  Linkedin:<span class="link">/tom</span> Devpost:<span class="link">/tom</span></p> -->
-      <a  href="github.com" target="_blank"> <i class="fa fa-github fa-lg"></i></a>
-      <a  href="linkedin.com" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
-      <a  href="medium.com" target="_blank"><i class="fa fa-medium fa-lg"></i></a>
+      <a class="fa fa-github fa-lg" href="{{user['github']}}"></a>
     </td>
   </tr>
 </table>
@@ -46,7 +41,7 @@
     <td valign="top">
         <div class="card" id="newsfeed">
             <div class="cardcontainer">
-              <h2 style="text-align:center">News Feed</h2>
+              <h2 style="text-align:center">Projects</h2>
               {% for post in posts_by_user %}
               <div class="card">
                 <div class="cardcontainer">
@@ -56,6 +51,7 @@
                       <td><h4>{{post['author']}} posted "{{post['title']}}"</h4></td>
                     </tr>
                   </table>
+                  <hr>
                   <p>{{post['body']}}</p>
                   <span class="time">{{post['time']}}</span>
                 </div>
