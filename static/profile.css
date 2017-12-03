@@ -81,6 +81,7 @@ p, h1, h2, h3 {
 .profilediv {
 	/* background-image:url('../static/img/wallpaper.jpg'); */
 	/* padding: 0 180px; */
+	margin-top: 60px;
 }
 .profile-bg{
     background-image:url('../static/img/wallpaper.jpg');
@@ -202,6 +203,7 @@ p, h1, h2, h3 {
 	background: white;
 	width: 60%;
 	margin: 20px auto;
+	margin-top: 80px;
 }
 #post-activity-btn{
 	background: #264cbf;;
