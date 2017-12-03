@@ -1,19 +1,69 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}" />
 {% extends 'layout.html' %}
-{% from "includes/_formhelpers.html" import render_field %} 
-{% block body %} 
-{% include 'includes/_messages.html'%}
-<form action="/feed" method="POST">
-    <div class="form-group">
-        {{render_field(form.title, class_="form-control")}}
+{% from "includes/_formhelpers.html" import render_field %}
+{% block body %}
+{% include 'includes/_messages.html' %}
+<div class="feed">
+<div class="topmenu">
+		<div class="menuItem"><a href="/feed">Home</a></div>
+		<div class="menuItem"><a href="/profile">My Profile</a></div>
+    <!-- <div class="menuItem">
+      <input type="text" class="searchbox" placeholder="Search"/>
+    </div> -->
+    <div class="menuItem" style="float: right;"><a href="#">Logout</a></div>
+</div>
+<div class="card" id="newactivity">
+    <div class="cardcontainer">
+      <h2>Create a post</h2>
+      <input type="text" class="titletext" placeholder="Title" /> <br/>
+      <textarea class="activitytext" placeholder="Insert content here!"></textarea> <br />
+      <button id = "post-activity-btn" class="button btn-block btn-lg">Submit!</button>
     </div>
-    <div class="form-group">
-        {{render_field(form.body, class_="form-control")}}
+</div>
+<div class="card" id="newsfeed">
+  <div class="cardcontainer">
+    <h2>News Feed</h2>
+    {% for post in posts %}
+    <div class="card">
+      <div class="cardcontainer">
+        <table>
+          <tr>
+            <td width=20%><a href="/profile"><img class="profilepic" src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg"></a></td>
+            <td><h4>{{post['author']}} posted</h4></td>
+          </tr>
+        </table>
+        <p>{{post['body']}}</p>
+        <span class="time">{{post['time']}}</span>
+      </div>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-</form>
-<ul>
-{% for post in posts %}
-    <li>{{post['title'] + " " + post['author']}}</li>
-{% endfor %}
-</ul> 
+    {% endfor %}
+  </div>
+</div>
+<!-- <table width="100%">
+  <tr>
+    <td valign="top">
+      <div class="card">
+        <div class="cardcontainer">
+          <h2>New Activity</h2>
+          <input type="text" class="titletext" placeholder="Title" /> <br/>
+          <textarea class="activitytext" placeholder="Insert content here!"></textarea> <br />
+          <button class="button">Submit!</button>
+        </div>
+      </div>
+    </td>
+    <td width="30%" valign="top">
+      <div class="card">
+        <div class="cardcontainer">
+          <h4>Contact & Personal Info</h4>
+          <p>Email: <span>tom@myspace.com</span></p>
+          <p>Website: <span>myspace.com</span></p>
+          <p>Birthday: <span>July 3rd</span></p>
+          <p>School: <span>Some University</span></p>
+          <p>Career: <span>Developer</span></p>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table> -->
+</div>
 {% endblock %}
