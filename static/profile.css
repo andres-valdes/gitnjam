@@ -230,3 +230,21 @@ p, h1, h2, h3 {
 	left: 0;
 	right: 0;
 }
+
+.alert-danger{
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+	width: 500px;
+	text-align: center;
+}
+
+.alert-success{
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+	width: 500px;
+	text-align: center;
+}
