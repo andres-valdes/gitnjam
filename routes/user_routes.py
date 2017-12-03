@@ -86,7 +86,7 @@ def feed():
             'time' : datetime.now()
         }
         posts.insert(new_post)
-    post_list = list(posts.find({}))
+    post_list = reversed(list(posts.find({})))
     return render_template('feed.html', form=form, posts=post_list)
 
 class Feed(Form):
