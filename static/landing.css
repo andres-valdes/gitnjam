@@ -1,0 +1,24 @@
+.landing{
+    width: -moz-available;
+    height: 1280px;
+    background-color: #4866ff; 
+    position: absolute;
+}
+.login-card{
+    top:100px;
+    position: absolute;
+    height:600px;
+    width:550px;
+    background-color:rgba(255,255,255,1);
+    border-radius:50px;
+    margin:auto;
+    left:0;
+    right:0; 
+    -webkit-box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
+    box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
+}
+.login-bg{
+    background-image: src('../img/wallpaper.jpg');
+    /* background-size: */
+}
