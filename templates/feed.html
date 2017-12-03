@@ -50,13 +50,13 @@ $(document).ready(function() {
 </div>
 <div class="card" id="newactivity">
     <div class="cardcontainer">
-      <h2 class="newsfeed-header">Create a post</h2>
+      <h2 class="newsfeed-header"><b>Create a post<b></h2>
       <form action="/feed" method="POST">
         <div class="form-group">
-          {{render_field(form.title, placeholder="Project Title", class_="form-control")}}
+          {{render_field(form.title, placeholder="Project Title", class_="titletext")}}
         </div>
         <div class="form-group">
-          {{render_field(form.body ,  placeholder="The next big thing...",class_="form-control")}}
+          {{render_field(form.body ,  placeholder="The next big thing...",class_="activitytext")}}
         </div>
         <button id = "post-activity-btn" class="button btn-block btn-lg">Post</button>
       </form>
@@ -64,7 +64,7 @@ $(document).ready(function() {
 </div>
 <div class="card" id="newsfeed">
   <div class="cardcontainer">
-    <h2 class="newsfeed-header">Projects</h2>
+    <h2 class="newsfeed-header"><b>Projects</b></h2>
     {% for post in posts %}
     <div class="card">
       <div class="cardcontainer">
