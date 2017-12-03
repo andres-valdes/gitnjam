@@ -94,6 +94,18 @@ def feed():
 def redir_profile():
     return profile(session['username'])
 
+@user_route.route('/like/<string:title>', methods = ['GET', 'POST', 'PUT'])
+@is_logged_in
+def like(title):
+    form = Feed(request.form)
+    posts = mongo.db.posts
+    current_post = posts.find_one({'title':title})
+    if 'likes' not in current_post.keys():
+        posts.update({'title':title}, {'$inc' : { 'likes' : 1}}, upsert=False)
+    else:
+        posts.update({'title':title}, {'$inc' : { 'likes' : 1}}, upsert=False)
+    post_list = reversed(list(posts.find({})))
+    return render_template('feed.html', form=form, posts=post_list, users=mongo.db.users)
 class Feed(Form):
     title = StringField('Project Title',  [validators.Length(min=1, max=50)])
     body = TextAreaField('Project Description',  [validators.Length(min=5, max=500)])
