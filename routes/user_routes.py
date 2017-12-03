@@ -71,7 +71,7 @@ def signup():
 def logout():
     session.clear()
     flash('You are now logged out', 'danger')
-    return redirect(url_for('user_routes.login'))
+    return redirect(url_for('user_route.login'))
 
 @user_route.route('/feed', methods = ['POST' , 'GET'])
 @is_logged_in
