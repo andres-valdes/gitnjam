@@ -8,17 +8,18 @@
     background: transparent;
     border: 1px solid rgba(0,0,0,0.3);
     color:black;
+    margin-top: 20px;
 }
 .login-card{
     top:100px;
     position: absolute;
-    height:600px;
+    height:480px;
     width:550px;
     background-color:rgba(255,255,255,1);
     border-radius:50px;
     margin:auto;
     left:0;
-    right:0; 
+    right:0;
     -webkit-box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
     -moz-box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
     box-shadow: 7px 10px 59px 3px rgba(0,0,0,0.75);
@@ -26,7 +27,7 @@
 .landing{
     background-image:url('../static/img/wallpaper.jpg');
     background-size: cover;
-    background-repeat: no-repeat;    
+    background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -66,6 +67,6 @@
 
 #login-heading{
     font-family: Billabong;
-    font-size: 80px;
+    font-size: 90px;
     text-align: center;
 }

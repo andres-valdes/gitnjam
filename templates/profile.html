@@ -4,51 +4,74 @@
 {% from "includes/_formhelpers.html" import render_field %}
 {% block body %}
 {% include 'includes/_messages.html' %}
-<div>
-<div class="topmenu">
-		<div class="menuItem"><a href="/feed">Feed</a></div>
-		<div class="menuItem"><a href="/profile">My Profile</a></div>
+<div class="profile-bg">
+<div class="topmenu"  style="position:fixed; width:100%;">
+		<div class="menuItem"><span class="fa fa-rss fa-lg" style="color:white; padding-right:10px;"></span><a href="/feed">Feed</a></div>
     <!-- <div class="menuItem">
       <input type="text" class="searchbox" placeholder="Search"/>
     </div> -->
-    <div class="menuItem" style="float: right;"><a href="#">Logout</a></div>
+    <!-- <div class="menuItem"></div><a href="/"  id="navbar-header">GitnJam</a></div>     -->
+    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="/logout">Logout</a></div>
+        
+    <div>
+        <header class="navbar-header">GitnJam</header>
+      </div>
 </div>
 <div class="profilediv">
-<table class="profiletable" width="100%">
-  <tr>
-    <td width=25% align="center">
-      <img class="profilepic" src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg" />
-    </td>
-    <td >
-      <h2>Tom From Myspace (Front-End Developer)</h2>
-  		<p class="bio">
-  			<b>Location:</b> FIU! <br />
-  			<b>Bio:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  			consequat. <br />
-  		</p>
-      <p>Github:<span class="link">/tom</span>  Linkedin:<span class="link">/tom</span> Devpost:<span class="link">/tom</span></p>
-    </td>
-  </tr>
-</table>
-</div>
-
-<table width="100%">
-  <tr>
-    <td valign="top">
-        <div class="card" id="newsfeed">
+<div class="profiletable" style="display:flex; justify-content: center;">
+    <div width=30% align="center" >
+      <img id="profilepic" src="{{user['pic']}}" />
+      <div>
+        <h2>{{user['username']}}</h2>
+        <p class="bio">
+          <b>School:</b> {{user['school']}} <br />
+          <b>language:</b> {{user['language']}} <br />
+          <b>Bio:</b> {{user['bio']}} <br />
+        </p>
+        <a class="fa fa-github fa-2x" href="{{user['github']}}"></a>
+      </div>
+    </div>
+    
+        <div class="card" id="newsfeed2">
             <div class="cardcontainer">
-              <h2>News Feed</h2>
+              <h2 style="text-align:center; color:#000"><b>{{user['username']}}'s</b> Projects</h2>
               {% for post in posts_by_user %}
               <div class="card">
                 <div class="cardcontainer">
                   <table>
                     <tr>
-                      <td width=20%><a href="/profile"><img class="profilepic" src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg"></a></td>
-                      <td><h4>{{post['author']}} posted</h4></td>
+                      <td width=20%><a href="/profile"><img class="profilepic" src="{{user['pic']}}"></a></td>
+                      <td><h4>{{post['author']}} posted "{{post['title']}}"</h4></td>
                     </tr>
                   </table>
+                  <hr>
+                  <p style="color:#000">{{post['body']}}</p>
+                  <span class="time">{{post['time']}}</span>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+  
+</div>
+</div>
+
+<table width="100%">
+  <tr>
+    <!-- <td valign="top">
+        <div class="card" id="newsfeed">
+            <div class="cardcontainer">
+              <h2 style="text-align:center">Projects</h2>
+              {% for post in posts_by_user %}
+              <div class="card">
+                <div class="cardcontainer">
+                  <table>
+                    <tr>
+                      <td width=20%><a href="/profile"><img class="profilepic" src="{{user['pic']}}"></a></td>
+                      <td><h4>{{post['author']}} posted "{{post['title']}}"</h4></td>
+                    </tr>
+                  </table>
+                  <hr>
                   <p>{{post['body']}}</p>
                   <span class="time">{{post['time']}}</span>
                 </div>
@@ -56,19 +79,40 @@
               {% endfor %}
             </div>
           </div>
-    </td>
-    <td width="30%" valign="top">
+    </td> -->
+    <!-- <td valign="top">
+        <div class="card" id="newsfeed">
+            <div class="cardcontainer">
+              <h2 style="text-align:center">Github Info</h2>
+              <div class="card">
+                <div class="cardcontainer">
+                    <div class="bio-description">
+                        <p><b>Repositories: </b> <span class="highlight">{{user['repos']}}</span></p>
+                        <p><b>Followers: </b> <span class="highlight">{{user['followers']}}</span></p>
+                        <p><b>Website:</b> <span class="highlight">cis.fiu.edu</span></p>
+                        <p><b>School: </b><span class="highlight">FIU</span></p>
+                        <p><b>Major: </b><span class="highlight">Computer Science</span></p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </td> -->
+<!-- 
+    <td width="50%" valign="top">
       <div class="card">
         <div class="cardcontainer">
-          <h4>Contact & Personal Info</h4>
-          <p>Email: <span class="highlight">tom@myspace.com</span></p>
-          <p>Website: <span class="highlight">myspace.com</span></p>
-          <p>Birthday: <span class="highlight">July 3rd</span></p>
-          <p>School: <span class="highlight">Some University</span></p>
-          <p>Career: <span class="highlight">Developer</span></p>
+          <div class="bio-description">
+              <h4>Contact & Personal Info</h4>
+              <p><b>Email:</b> <span class="highlight">tom@myspace.com</span></p>
+              <p><b>Website:</b> <span class="highlight">myspace.com</span></p>
+              <p><b>School: </b><span class="highlight">Some University</span></p>
+              <p><b>Major: </b><span class="highlight">Developer</span></p>
+          </div>
         </div>
       </div>
-    </td>
+    </td> -->
+
   </tr>
 </table>
 </div>

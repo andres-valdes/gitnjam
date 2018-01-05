@@ -1,46 +1,108 @@
+
 <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}" />
 {% extends 'layout.html' %}
-{% from "includes/_formhelpers.html" import render_field %}
 {% block body %}
 {% include 'includes/_messages.html' %}
-<div class="feed">
-<div class="topmenu">
-		<div class="menuItem"><a href="/feed">Home</a></div>
-		<div class="menuItem"><a href="/profile">My Profile</a></div>
-    <!-- <div class="menuItem">
-      <input type="text" class="searchbox" placeholder="Search"/>
-    </div> -->
-    <div class="menuItem" style="float: right;"><a href="#">Logout</a></div>
+{% from "includes/_formhelpers.html" import render_field %}
+<!-- <script type="text/javascript">
+$(document).ready(function() {
+
+	var socket = io.connect('http://' + document.domain + ':5000');
+
+	socket.on('connect', function() {
+		socket.send('User has connected!');
+    socket.emit('greet', 'hello world')
+	});
+
+  console.log('setting timeout')
+  setInterval(() => {
+    console.log('Holla at ya boi')
+    console.log(document.domain)
+    socket.send('greet');
+    socket.emit('greet')
+  }, 2000)
+
+	socket.on('message', function(msg) {
+		$("#messages").append('<div width="50%"><p class=myMessage><span style="font-size: .7em">Person:</span><br/>'+msg+'</p></div>');
+		console.log('Received message');
+	});
+
+	$('#sendbutton').on('click', function() {
+		socket.send($('#myMessage').val());
+		$('#myMessage').val('');
+	});
+
+});
+</script> -->
+
+<div id="chatbox" class="chatbox">
+  <div style="display:flex">
+      <p class="recipient" style="position:absolute; margin:auto; left:0;right:0;"><b>GitnJam - Chatbox</b></p>
+      <button  id="x-button" style="background:transparent; border-radius:0; position:absolute; right:0;"class="pull-right">x</button>
+  </div>
+
+<div id="messages"></div>
+<input type="text" style="border-radius: 50px; width:180px;" id="myMessage">
+<button id="sendbutton" style="background:transparent; color:black;">Send</button>
 </div>
+<div class="feed">
+<div class="topmenu"  style="position:fixed; width:100%;">
+    <div class="menuItem"><span class="fa fa-user fa-lg" style="color:white; padding-right:10px;"></span><a href="/profile">My Profile</a></div>
+    <div class="menuItem" style="float: right;"><span class="fa fa-power-off fa-lg" style="color:white; padding-right:10px;"></span><a href="/logout">Logout</a></div>
+    <div>
+      <header class="navbar-header">GitnJam</header>
+    </div>
+</div>
+
 <div class="card" id="newactivity">
     <div class="cardcontainer">
-      <h2>Create a post</h2>
+      <h2 class="newsfeed-header"><b>Create a post<b></h2>
       <form action="/feed" method="POST">
         <div class="form-group">
-          {{render_field(form.title, class_="form-control")}}
+          {{render_field(form.title, placeholder="Project Title", class_="titletext")}}
         </div>
         <div class="form-group">
-          {{render_field(form.body, class_="form-control")}}
+          {{render_field(form.body ,  placeholder="The next big thing...",class_="activitytext")}}
         </div>
-        <!-- <textarea class="activitytext" placeholder="Insert content here!"></textarea> <br /> -->
-        <button id = "post-activity-btn" class="button btn-block btn-lg">Submit!</button>
+        <button id = "post-activity-btn" class="button btn-block btn-lg">Post</button>
       </form>
     </div>
 </div>
 <div class="card" id="newsfeed">
   <div class="cardcontainer">
-    <h2>News Feed</h2>
+    <h2 class="newsfeed-header"><b>Projects</b></h2>
     {% for post in posts %}
     <div class="card">
       <div class="cardcontainer">
         <table>
           <tr>
-            <td width=20%><a href="/profile"><img class="profilepic" src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg"></a></td>
-            <td><h4>{{post['author']}} posted</h4></td>
+            <td width=20%><a href="/profile/{{post['author']}}"><img class="profilepic" src="{{users.find_one({'username' : post['author']})['pic']}}"></a></td>
+            <td>
+              <div>
+              <h2><b>{{post['author']}}</b> posted "{{post['title']}}"</h2>
+              </div>
+            </td>
+        <td>
+        </td>
           </tr>
+
         </table>
-        <p>{{post['body']}}</p>
-        <span class="time">{{post['time']}}</span>
+        <hr>
+        <!-- <h2 class="post-title"><span><b>Post title: </b> </span>{{post['title']}}</h2> -->
+        <p>{{post['body']}}</p>   
+<<<<<<< HEAD
+          <button id="chat-button" class="btn btn-primary">Chat now  <i class="fa fa-comment" aria-hidden="true"></i></button>
+          <a href="/like/{{post['title']}}"><i class="fa fa-heart 2x pull-right" style="color:red"> {{post['likes']}}</i></a>
+=======
+          <button id="chat-button"class="btn btn-primary">Chat now  <i class="fa fa-comment" aria-hidden="true"></i></button>
+          <i class="fa fa-heart 2x pull-right" style="color:red"></i>
+>>>>>>> e76ef22966a9c8cca03bc9390ccabc4043458dc4
+          <i class="fa fa-commenting 2x pull-right" style="color:#396afc"></i>
+            <!-- <i class="fa fa-heart" aria-hidden="true"></i>
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <i class="fa fa-weixin" aria-hidden="true"></i>                       -->
+
+        <!-- <span class="time">{{post['time']}}</span> -->
       </div>
     </div>
     {% endfor %}
@@ -73,4 +135,20 @@
   </tr>
 </table> -->
 </div>
+<script>
+    $(document).ready(function(){
+      var chatbox = $('#chatbox');
+      var chatbutton = $('#chat-button');
+      var xbutton = $('#x-button');
+  
+      chatbutton.on('click', function(){
+        chatbox.css({display:'block'});
+      })
+      xbutton.on('click', function(){
+        chatbox.css({display:'none'});
+      })
+  
+  
+    });
+  </script>
 {% endblock %}

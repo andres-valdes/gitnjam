@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, request, session, redirect, url_for, flash, Blueprint
 from passlib.hash import sha256_crypt
 from models.user_model import SignupForm, LoginForm, Form
-from wtforms import Form, TextField, StringField, validators, PasswordField
+from wtforms import Form, TextField, StringField, validators, PasswordField, TextAreaField
 from flask_pymongo import PyMongo
 from functools import wraps
 from config.database import Mongo
@@ -10,17 +10,17 @@ from config.database import Mongo
 
 from flask import Flask
 
-app = Flask(__name__) 
+app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'gitnjam'
 app.config['MONGO_URI'] = 'mongodb://localhost/gitnjam'
 
-mongo = PyMongo(app) 
+mongo = PyMongo(app)
 
 user_route = Blueprint('user_route', __name__)
 
 def is_logged_in(f):
     @wraps(f)
-    def wrap(*args, **kwargs): 
+    def wrap(*args, **kwargs):
         if 'is_logged_in' in session:
             return f(*args, **kwargs)
         flash('Unauthorized, Please login', 'danger')
@@ -71,28 +71,44 @@ def signup():
 def logout():
     session.clear()
     flash('You are now logged out', 'danger')
-    return redirect(url_for('user_routes.login'))
+    return redirect(url_for('user_route.login'))
 
 @user_route.route('/feed', methods = ['POST' , 'GET'])
 @is_logged_in
 def feed():
     form = Feed(request.form)
     posts = mongo.db.posts
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
         new_post = {
             'title' : request.form['title'],
             # 'image' : request.form['image'],
             'author' : session['username'],
             'body' : request.form['body'],
-            'time' : datetime.now()
         }
         posts.insert(new_post)
     post_list = reversed(list(posts.find({})))
-    return render_template('feed.html', form=form, posts=post_list)
+    return render_template('feed.html', form=form, posts=post_list, users=mongo.db.users)
 
+@user_route.route('/profile', methods = ['GET', 'POST'])
+@is_logged_in
+def redir_profile():
+    return profile(session['username'])
+
+@user_route.route('/like/<string:title>', methods = ['GET', 'POST', 'PUT'])
+@is_logged_in
+def like(title):
+    form = Feed(request.form)
+    posts = mongo.db.posts
+    current_post = posts.find_one({'title':title})
+    if 'likes' not in current_post.keys():
+        posts.update({'title':title}, {'$inc' : { 'likes' : 1}}, upsert=False)
+    else:
+        posts.update({'title':title}, {'$inc' : { 'likes' : 1}}, upsert=False)
+    post_list = reversed(list(posts.find({})))
+    return render_template('feed.html', form=form, posts=post_list, users=mongo.db.users)
 class Feed(Form):
-    title = StringField('Title')
-    body = TextField('Body')
+    title = StringField('',  [validators.Length(min=1, max=50)])
+    body = TextAreaField('',  [validators.Length(min=5, max=500)])
 @user_route.route('/profile/<string:username>', methods = ['GET', 'POST'])
 @is_logged_in
 def profile(username):
@@ -101,5 +117,5 @@ def profile(username):
     posts_by_user = []
     for post in post_list:
         if post['author'] == username:
-            posts_by_user.insert(0, post)
-    return render_template('profile.html', posts_by_user=posts_by_user)
+            posts_by_user.append(post)
+    return render_template('profile.html', posts_by_user=posts_by_user, user=mongo.db.users.find_one({'username' : username}))
